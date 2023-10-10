@@ -5,7 +5,7 @@
 }
 
 html {
-    font-family: sans-serif;
+    font-family: 'Gabarito', sans-serif;
 }
 
 /* HEADER STYLES */
@@ -17,30 +17,36 @@ li {
 
 a {
     text-decoration: none;
-    color: white;
+    color: #ffffed;
+    font-weight: 700;
 }
 
 .nav-logo {
     font-size: 1.5rem;
+    text-transform: uppercase;
 }
 
 header {
-    background-image: url('./lexi-t-LACP2jBOmHI-unsplash.jpg');
+    background-image: url('./johannes-hofmann-gW3ddTAKTJg-unsplash.jpg');
     background-size: cover;
     min-height: 90vh;
     width: 100%;
-    background-position: 0 100%;
+    background-position: 0 60%;
     overflow: hidden;
     
 }
 
 .nav-bar {
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
     min-width: 100%;
-    background-color: #151515;
+    background-color: #080e08;
+    border-bottom: 5px solid #101d11;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .nav-menu {
@@ -48,12 +54,21 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+.search{
+    margin-top: 50vh;
+    text-align: center;
+}
 .search-bar {
-    max-width: 200px;
+    padding: 5px 15px;
+    width: 350px;
+    height: 50px;
+    border-radius: 25px;
+    border: 3px solid #ffffed;
+    background-color: #ffffedbd;
 }
 
 /* BODY STYLES */
 main {
     min-height: 100vh;
-    background-color: gray;
+    background-color: #ffffed;
 }
