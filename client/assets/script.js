@@ -4,6 +4,6 @@ let searchButton = document.querySelector('.search-button')
 let mainBody = document.querySelector('.main-body')
 let newText = '<p>HELLO!!</p>'
 
-searchButton.addEventListener('click', function () {
+searchButton.addEventListener('click', () => {
     console.log('hi')
 })
