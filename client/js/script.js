@@ -6,6 +6,7 @@ const mainBody = document.querySelector('.main-body')
 const makeBtn = document.querySelector('#new')
 const modelBtn = document.querySelector('#used')
 const fuelTypeBtn = document.querySelector('#electric')
+const dropdown = document.getElementById('myDropdown')
 
 // VARIABLES
 let carImg
@@ -83,7 +84,11 @@ const searchBtnClick = async () => {
         <img src="${car.image_of_car}" alt="" class="car-pic">
         <h3 class="car-name">${carName}</h3>
         <p class="price">$${car.price}</p>
-        <p class="price">${car.options.name} Package: ${options.join(", ")}</p>
+        <select id="myDropdown">
+          <option value=${car.options}>Luxury</option>
+          <option value=${car.options.name}>Premium</option>
+          <option value=${car.options.name}>Base</option>
+        </select>
         </div>`
         mainBody.innerHTML += carText
       }   
@@ -94,7 +99,7 @@ const searchBtnClick = async () => {
   }
 }
 
-
+{/* <p class="price">${car.options.name} Package: ${options.join(", ")}</p> */}
 
 // ONCLICK ELEMENTS
 makeBtn.addEventListener('click', makeBtnClick)
@@ -103,11 +108,19 @@ fuelTypeBtn.addEventListener('click', fuelTypeBtnClick)
 searchButton.addEventListener('click', searchBtnClick)
 infoBtns.addEventListener('click', console.log('hi'))
 
+// Add an event listener to detect changes in the selected option
+dropdown.addEventListener('change', function() {
+  // Get the selected value
+  const selectedValue = dropdown.value;
+  console.log('Selected Option: ' + selectedValue);
+})
 
 // HAMBURGER MENU
 const hamburger = document.querySelector('.hamburger')
 const navMenu = document.querySelector('.nav-menu')
 const navLink = document.querySelectorAll('.nav-link')
+
+
 
 const mobileMenu = () => {
   hamburger.classList.toggle('active')
