@@ -99,9 +99,26 @@ header {
   }
 
 /* BODY STYLES */
-main {
+.main-body {
     min-height: 100vh;
     background-color: #ffffed;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+.item-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 400px;
+    width: 300px;
+    border: 1px solid#080e08;
+}
+.car-pic {
+    height: 100px;
+    border: 1px solid #93ad34;
 }
 
 /* MEDIA QUERY */
@@ -129,5 +146,9 @@ main {
     }
     .hamburger.active .bar:nth-child(3){
         transform: translateY(-8px) rotate(-45deg);
+    }
+    .item-holder{
+        width: 150px;
+        height: 200px;
     }
 }
