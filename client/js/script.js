@@ -7,30 +7,69 @@ const usedBtn = document.querySelector('#used')
 const electricBtn = document.querySelector('#electric')
 
 // VARIABLES
-let carText
+let carImg
+let carName
+let carPrice
 
 // FUNCTIONS
-const clearMainBody = () => {
-    mainBody.innerHTML = ''
+const newBtnClick = async () => {
+  mainBody.replaceChildren()
+  for(let i = 0; i < 7; i++){
+    console.log('hi')
+    let carText = `<div class="item-holder">
+    <img src="" alt="" class="car-pic">
+    <h3 class="car-name">hi${i}</h3>
+    <p class="price">price</p>
+    </div>`
+    mainBody.innerHTML += carText
+  }
 }
-const newBtnClick = async () => {}
 
-const usedBtnClick = async () => {}
+const usedBtnClick = async () => {
+  mainBody.replaceChildren()
+  for(let i = 0; i < 5; i++){
+    console.log('hi')
+    let carText = `<div class="item-holder">
+    <img src="" alt="" class="car-pic">
+    <h3 class="car-name">hi${i}</h3>
+    <p class="price">price</p>
+    </div>`
+    mainBody.innerHTML += carText
+  }
+}
 
-const electricBtnClick = async () => {}
+const electricBtnClick = async () => {
+  mainBody.replaceChildren()
+  for(let i = 0; i < 3; i++){
+    console.log('hi')
+    let carText = `<div class="item-holder">
+    <img src="" alt="" class="car-pic">
+    <h3 class="car-name">hi${i}</h3>
+    <p class="price">price</p>
+    </div>`
+    mainBody.innerHTML += carText
+  }
+}
 
-// ONCLICK ELEMENTS
-searchButton.addEventListener('click', () => {
+const searchBtnClick = async () => {
+  mainBody.replaceChildren()
+  carName = searchBar.value
     for(let i = 0; i < 10; i++){
       console.log('hi')
-      carText = `<div class="item-holder">
+      let carText = `<div class="item-holder">
       <img src="" alt="" class="car-pic">
-      <h3 class="car-name">hi${i}</h3>
-      <p class="price">price</p>
+      <h3 class="car-name">${carName}</h3>
+      <p class="price">${i}</p>
       </div>`
       mainBody.innerHTML += carText
     }
-})
+}
+ 
+// ONCLICK ELEMENTS
+newBtn.addEventListener('click', newBtnClick)
+usedBtn.addEventListener('click', usedBtnClick)
+electricBtn.addEventListener('click', electricBtnClick)
+searchButton.addEventListener('click', searchBtnClick)
 
 // HAMBURGER MENU
 const hamburger = document.querySelector('.hamburger')
