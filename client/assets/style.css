@@ -67,13 +67,22 @@ header {
     border-radius: 25px;
     border: 3px solid #ffffed;
     background-color: #ffffedbd;
+    font-family: 'Gabarito', sans-serif;
+    font-size: 1rem;
 }
 .search-button {
     height: 50px;
     width: 80px;
     border-radius: 25px;
-    border: 3px solid #ffffed;
+    border: 3px solid #c7ea46;
+    background-color: #c7ea46;
     text-transform: uppercase;
+    font-family: 'Gabarito', sans-serif;
+    font-size: 1rem;
+}
+.search-button:hover {
+    background-color: #93ad34;
+    border-color: #93ad34;
 }
 /* BODY STYLES */
 main {
