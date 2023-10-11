@@ -27,7 +27,47 @@ const getOneOption = async (req,res) => {
     }
 }
 
+async function deleteOption(req, res) {
+    try {
+        const id = req.params.id
+        let option = await Option.findByIdAndDelete(id)
+        if (option) {
+            return res.status(200).json(option)
+        }
+        throw new Error("Option not found")
+    } catch (e) {
+        return res.status(500).send(e.message)
+    }
+}
+
+async function updateOption(req, res) {
+    try {
+        const id = req.params.id
+        let option = await Option.findByIdAndUpdate(id, req.body, { new: true })
+        if (option) {
+            return res.status(200).json(option)
+        }
+        throw new Error("Option not found")
+    } catch (e) {
+        return res.status(500).send(e.message)
+    }
+}
+
+async function createOption(req, res) {
+    try {
+        const option = await new Option(req.body)
+        await option.save()
+        return res.status(201).json()
+                
+    } catch (e) {
+        return res.status(500).json({ error: e.message })
+    }
+}
+
 module.exports = {
     getAllOptions,
-    getOneOption
+    getOneOption,
+    createOption,
+    updateOption,
+    deleteOption
 }

@@ -14,23 +14,6 @@ const getAllModels = async (req,res) => {
     }
 }
 
-// const FindAllFlightsFilter = async () => {
-//     const flights = await Flight.find({}, {airline:1, flightNumber:1, departureDateTime:1, departingAirport:1})
-//     .populate('departingAirport', 'name')
-//     .exec()
-    
-//     const formattedFlights = flights.map((flight) => ({
-//         airline: flight.airline,
-//         flightNumber: flight.flightNumber,
-//         departureDateTime: flight.departureDateTime,
-//         departingAirport: flight.departingAirport.name, // Access the name property
-//       }));
-
-//     console.log('All Flights:', formattedFlights)   
-
-
-// }
-
 const getOneModel = async (req,res) => {
     try {
         const id = req.params.id
