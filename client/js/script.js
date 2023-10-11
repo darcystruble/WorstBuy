@@ -25,7 +25,7 @@ const newBtnClick = async () => {
   }
 }
 
-const usedBtnClick = async () => {
+const gasBtnClick = async () => {
   mainBody.replaceChildren()
   for(let i = 0; i < 5; i++){
     console.log('hi')
@@ -38,7 +38,7 @@ const usedBtnClick = async () => {
   }
 }
 
-const electricBtnClick = async () => {
+const hybridBtnClick = async () => {
   mainBody.replaceChildren()
   for(let i = 0; i < 3; i++){
     console.log('hi')
@@ -67,8 +67,8 @@ const searchBtnClick = async () => {
  
 // ONCLICK ELEMENTS
 newBtn.addEventListener('click', newBtnClick)
-usedBtn.addEventListener('click', usedBtnClick)
-electricBtn.addEventListener('click', electricBtnClick)
+gasBtn.addEventListener('click', usedBtnClick)
+hybridBtn.addEventListener('click', electricBtnClick)
 searchButton.addEventListener('click', searchBtnClick)
 
 // HAMBURGER MENU
