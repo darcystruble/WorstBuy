@@ -113,7 +113,8 @@ header {
     align-items: center;
     height: 400px;
     width: 300px;
-    border: 1px solid#080e08;
+    background-color: whitesmoke;
+    box-shadow: 0 10px 15px #6d7c6e;
     margin: 30px auto;
 }
 .car-pic {
