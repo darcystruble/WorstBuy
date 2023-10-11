@@ -98,13 +98,19 @@ header {
   }
 
 /* BODY STYLES */
-.main-body {
+.main {
     min-height: 100vh;
     background-color: #ffffed;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.main-body {
+    padding-top: 20px;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 20px;
 }
 .item-holder {
     display: flex;
@@ -116,6 +122,22 @@ header {
     background-color: whitesmoke;
     box-shadow: 0 10px 15px #6d7c6e;
     margin: 30px auto;
+}
+.info-button {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.more-info {
+    width: 150px;
+    height: 60px;
+    border: 2px solid #93ad34;
+    border-radius: 25px;
+    margin: 5px;
+}
+.more-info:hover {
+    background-color: #93ad34;
 }
 .car-pic {
     height: 100px;
