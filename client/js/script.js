@@ -66,11 +66,24 @@ const searchBtnClick = async () => {
   model.data.forEach((car) => {
     console.log(car)
     if (carName == car.name) {
-      // console.log('hi')
-        let carText = `<div class="item-holder">
+      let options = []
+      if (car.options.bluetooth) {
+        options.push("bluetooth")
+      }
+      if (car.options.heated_seats) {
+        options.push("heated seats")
+      }
+      if (car.options.navigation) {
+        options.push("navigation")
+      }
+      if (car.options.remote_start) {
+        options.push("remote start")
+      }
+      let carText = `<div class="item-holder">
         <img src="${car.image_of_car}" alt="" class="car-pic">
         <h3 class="car-name">${carName}</h3>
         <p class="price">$${car.price}</p>
+        <p class="price">${car.options.name} Package: ${options.join(", ")}</p>
         </div>`
         mainBody.innerHTML += carText
       }   
