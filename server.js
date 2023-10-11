@@ -1,6 +1,8 @@
 const express = require('express');
 const db = require('./config');
 const logger = require('morgan')
+const bodyParser = require('body-paraser')
+const cors = require('cors')
 
 const makeController = require('./controllers/makeController')
 const modelController = require('./controllers/modelController')
@@ -10,6 +12,8 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(cors())
 
 
 //cRud - Read
