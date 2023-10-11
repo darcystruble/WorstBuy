@@ -3,15 +3,22 @@ const searchBar = document.querySelector('.search-bar')
 const searchButton = document.querySelector('.search-button')
 const mainBody = document.querySelector('.main-body')
 const newBtn = document.querySelector('#new')
-const usedBtn = document.querySelector('#used')
-const electricBtn = document.querySelector('#electric')
+const gasBtn = document.querySelector('#used')
+const hybridBtn = document.querySelector('#electric')
 
 // VARIABLES
 let carImg
 let carName
 let carPrice
+const base = 'http://localhost:3001/'
 
 // FUNCTIONS
+const tester = async () => {
+  let testing = await axios.get(`${base}models`)
+  console.log(testing)
+}
+tester()
+
 const newBtnClick = async () => {
   mainBody.replaceChildren()
   for(let i = 0; i < 7; i++){
@@ -64,11 +71,11 @@ const searchBtnClick = async () => {
       mainBody.innerHTML += carText
     }
 }
- 
+
 // ONCLICK ELEMENTS
 newBtn.addEventListener('click', newBtnClick)
-gasBtn.addEventListener('click', usedBtnClick)
-hybridBtn.addEventListener('click', electricBtnClick)
+gasBtn.addEventListener('click', gasBtnClick)
+hybridBtn.addEventListener('click', hybridBtnClick)
 searchButton.addEventListener('click', searchBtnClick)
 
 // HAMBURGER MENU
