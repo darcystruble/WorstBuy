@@ -25,7 +25,9 @@ a {
     font-size: 1.5rem;
     text-transform: uppercase;
 }
-
+.nav-logo .first {
+    font-size: 2rem;
+}
 header {
     background-image: url('./johannes-hofmann-gW3ddTAKTJg-unsplash.jpg');
     background-size: cover;
@@ -66,7 +68,13 @@ header {
     border: 3px solid #ffffed;
     background-color: #ffffedbd;
 }
-
+.search-button {
+    height: 50px;
+    width: 80px;
+    border-radius: 25px;
+    border: 3px solid #ffffed;
+    text-transform: uppercase;
+}
 /* BODY STYLES */
 main {
     min-height: 100vh;
