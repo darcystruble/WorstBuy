@@ -1,4 +1,5 @@
 const Make = require('../models/makes')
+const mongoose = require('mongoose');
 
 const getAllMakes = async (req,res) => {
     try {
@@ -12,7 +13,10 @@ const getAllMakes = async (req,res) => {
 const getOneMake = async (req,res) => {
     try {
         const id = req.params.id
-        const makes = await Make.findById(id)
+        let makes = false
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            makes = await Make.findById(id)
+        }
         if (makes) {
             return res.json(makes)
         }

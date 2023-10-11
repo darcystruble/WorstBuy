@@ -3,7 +3,7 @@ const {Schema} = require('mongoose')
 
 const modelsSchema = new Schema(
     {        
-        make: {type: Schema.Types.ObjectId, ref: 'Make'},
+        make: {type: Schema.Types.ObjectId, ref: 'Makes'},
         image_of_car: {type: String, required: true},
         year: {type: Number, required: true},
         name: {type: String, required: true},

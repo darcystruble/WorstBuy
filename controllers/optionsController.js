@@ -1,4 +1,5 @@
 const Option = require('../models/options')
+const mongoose = require('mongoose');
 
 const getAllOptions = async (req,res) => {
     try {
@@ -12,7 +13,10 @@ const getAllOptions = async (req,res) => {
 const getOneOption = async (req,res) => {
     try {
         const id = req.params.id
-        const option = await Option.findById(id)
+        let option = false
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            option = await Option.findById(id)
+        }
         if (option) {
             return res.json(option)
         }

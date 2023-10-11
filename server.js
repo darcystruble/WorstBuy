@@ -5,8 +5,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const makeController = require('./controllers/makeController')
-const modelController = require('./controllers/modelController')
 const optionsController = require('./controllers/optionsController');
+const modelController = require('./controllers/modelController')
+
 
 const PORT = process.env.PORT || 3001;
 

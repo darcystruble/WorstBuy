@@ -1,18 +1,43 @@
+const Make = require('../models/makes')
 const Model = require('../models/models')
+const mongoose = require('mongoose');
+
 
 const getAllModels = async (req,res) => {
     try {
-        const models = await Model.find()
+        const models = await Model.find().populate('make').populate('options').exec()        
+        console.log(models)
         return res.json(models)
     } catch (e) {
+        console.log(e.message)
         return res.status(500).send(e.message)
     }
 }
 
+// const FindAllFlightsFilter = async () => {
+//     const flights = await Flight.find({}, {airline:1, flightNumber:1, departureDateTime:1, departingAirport:1})
+//     .populate('departingAirport', 'name')
+//     .exec()
+    
+//     const formattedFlights = flights.map((flight) => ({
+//         airline: flight.airline,
+//         flightNumber: flight.flightNumber,
+//         departureDateTime: flight.departureDateTime,
+//         departingAirport: flight.departingAirport.name, // Access the name property
+//       }));
+
+//     console.log('All Flights:', formattedFlights)   
+
+
+// }
+
 const getOneModel = async (req,res) => {
     try {
         const id = req.params.id
-        const model = await Model.findById(id)
+        let model = false
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            model = await Model.findById(id).populate('make').populate('options').exec()
+        }        
         if (model) {
             return res.json(model)
         }
@@ -26,7 +51,7 @@ const getOneModel = async (req,res) => {
 async function deleteModel(req, res) {
     try {
         const id = req.params.id
-        let model = await Make.findByIdAndDelete(id)
+        let model = await Make.findByIdAndDelete(id).populate('make').populate('options').exec()
         if (model) {
             return res.status(200).json(model)
         }
@@ -39,7 +64,7 @@ async function deleteModel(req, res) {
 async function updateModel(req, res) {
     try {
         const id = req.params.id
-        let model = await Model.findByIdAndUpdate(id, req.body, { new: true })
+        let model = await Model.findByIdAndUpdate(id, req.body, { new: true }).populate('make').populate('options').exec()
         if (model) {
             return res.status(200).json(model)
         }
