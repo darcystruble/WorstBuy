@@ -1,51 +1,50 @@
 // DOM ELEMENTS
 const searchBar = document.querySelector('.search-bar')
 const searchButton = document.querySelector('.search-button')
+const infoBtns = document.querySelector('.info-button')
 const mainBody = document.querySelector('.main-body')
-const newBtn = document.querySelector('#new')
-const gasBtn = document.querySelector('#used')
-const hybridBtn = document.querySelector('#electric')
+const makeBtn = document.querySelector('#new')
+const modelBtn = document.querySelector('#used')
+const fuelTypeBtn = document.querySelector('#electric')
 
 // VARIABLES
 let carImg
 let carName
 let carPrice
+let carManufacturer
 const base = 'http://localhost:3001/'
 
 // FUNCTIONS
 const tester = async () => {
-  let testing = await axios.get(`${base}models`)
-  console.log(testing)
+  let testing = await axios.get(`${base}makes`)
+  console.log(testing.data)
 }
 tester()
 
-const newBtnClick = async () => {
+  //     let carText = `<div class="item-holder">
+  //     <img src="" alt="" class="car-pic">
+  //     <h3 class="car-name">${carName}</h3>
+  //     <p class="price">price</p>
+  //     </div>`
+
+const makeBtnClick = async () => {
+  infoBtns.replaceChildren()
   mainBody.replaceChildren()
-  for(let i = 0; i < 7; i++){
-    console.log('hi')
-    let carText = `<div class="item-holder">
-    <img src="" alt="" class="car-pic">
-    <h3 class="car-name">hi${i}</h3>
-    <p class="price">price</p>
-    </div>`
-    mainBody.innerHTML += carText
-  }
+  let makes = await axios.get(`${base}makes`)
+
+  makes.data.forEach((make) => {
+    carManufacturer = make.manufacturer
+    let makeInfoBtn = `<button class="more-info">${carManufacturer}</button>`
+    infoBtns.innerHTML += makeInfoBtn
+  })
 }
 
-const gasBtnClick = async () => {
+const modelBtnClick = async () => {
   mainBody.replaceChildren()
-  for(let i = 0; i < 5; i++){
-    console.log('hi')
-    let carText = `<div class="item-holder">
-    <img src="" alt="" class="car-pic">
-    <h3 class="car-name">hi${i}</h3>
-    <p class="price">price</p>
-    </div>`
-    mainBody.innerHTML += carText
-  }
+  let testing = await axios.get(`${base}models`)
 }
 
-const hybridBtnClick = async () => {
+const fuelTypeBtnClick = async () => {
   mainBody.replaceChildren()
   for(let i = 0; i < 3; i++){
     console.log('hi')
@@ -72,11 +71,15 @@ const searchBtnClick = async () => {
     }
 }
 
+
+
 // ONCLICK ELEMENTS
-newBtn.addEventListener('click', newBtnClick)
-gasBtn.addEventListener('click', gasBtnClick)
-hybridBtn.addEventListener('click', hybridBtnClick)
+makeBtn.addEventListener('click', makeBtnClick)
+modelBtn.addEventListener('click', modelBtnClick)
+fuelTypeBtn.addEventListener('click', fuelTypeBtnClick)
 searchButton.addEventListener('click', searchBtnClick)
+infoBtns.addEventListener('click', console.log('hi'))
+
 
 // HAMBURGER MENU
 const hamburger = document.querySelector('.hamburger')
