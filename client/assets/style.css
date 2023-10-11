@@ -2,19 +2,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
-
 html {
     font-family: 'Gabarito', sans-serif;
 }
 
 /* HEADER STYLES */
-
 li {
     list-style: none;
     padding: 1rem;
 }
-
 a {
     text-decoration: none;
     color: #ffffed;
@@ -31,7 +29,6 @@ header {
     background-position: 0 60%;
     overflow: hidden;  
 }
-
 .nav-logo {
     font-size: 1.5rem;
     text-transform: uppercase;
@@ -64,7 +61,7 @@ header {
     padding: 5px 15px;
     width: 350px;
     height: 50px;
-    border-radius: 25px;
+    border-radius: 25px 0 0 25px;
     border: 3px solid #ffffed;
     background-color: #ffffedbd;
     font-family: 'Gabarito', sans-serif;
@@ -73,7 +70,7 @@ header {
 .search-button {
     height: 50px;
     width: 80px;
-    border-radius: 25px;
+    border-radius: 0 25px 25px 0;
     border: 3px solid #c7ea46;
     background-color: #c7ea46;
     text-transform: uppercase;
@@ -83,7 +80,9 @@ header {
 .search-button:hover {
     background-color: #93ad34;
     border-color: #93ad34;
+    cursor: pointer;
 }
+
 /* HAMBURGER MENU */
 .hamburger {
     display: none;
@@ -150,5 +149,14 @@ header {
     .item-holder{
         width: 150px;
         height: 200px;
+    }
+    .search-bar {
+        width: 250px;
+    }
+    .search {
+        margin-top: 20vh;
+    }
+    header {
+        min-height: 40vh;
     }
 }

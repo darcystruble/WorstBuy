@@ -1,8 +1,11 @@
 // JS File
 // DOM ELEMENTS
-let searchBar = document.querySelector('.search-bar')
-let searchButton = document.querySelector('.search-button')
-let mainBody = document.querySelector('.main-body')
+const searchBar = document.querySelector('.search-bar')
+const searchButton = document.querySelector('.search-button')
+const mainBody = document.querySelector('.main-body')
+const newBtn = document.querySelector('#new')
+const usedBtn = document.querySelector('#used')
+const electricBtn = document.querySelector('#electric')
 
 let carText = `<div class="item-holder">
 <img src="" alt="" class="car-pic">
