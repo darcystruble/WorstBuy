@@ -1,4 +1,3 @@
-// JS File
 // DOM ELEMENTS
 const searchBar = document.querySelector('.search-bar')
 const searchButton = document.querySelector('.search-button')
@@ -7,22 +6,31 @@ const newBtn = document.querySelector('#new')
 const usedBtn = document.querySelector('#used')
 const electricBtn = document.querySelector('#electric')
 
-let carText = `<div class="item-holder">
-<img src="" alt="" class="car-pic">
-<h3 class="car-name">hi</h3>
-<p class="price">price</p>
-</div>`
+// VARIABLES
+let carText
 
+// FUNCTIONS
 const clearMainBody = () => {
     mainBody.innerHTML = ''
 }
+const newBtnClick = async () => {}
 
+const usedBtnClick = async () => {}
+
+const electricBtnClick = async () => {}
+
+// ONCLICK ELEMENTS
 searchButton.addEventListener('click', () => {
-    // clearMainBody()
-    console.log('hi')
-    mainBody.innerHTML = carText
+    for(let i = 0; i < 10; i++){
+      console.log('hi')
+      carText = `<div class="item-holder">
+      <img src="" alt="" class="car-pic">
+      <h3 class="car-name">hi${i}</h3>
+      <p class="price">price</p>
+      </div>`
+      mainBody.innerHTML += carText
+    }
 })
-
 
 // HAMBURGER MENU
 const hamburger = document.querySelector('.hamburger')
