@@ -53,9 +53,8 @@ async function createMake(req, res) {
     try {
         const make = await new Make(req.body)
         await make.save()
-        return res.status(201).json({
-            make
-        })
+        return res.status(201).json()
+                
     } catch (e) {
         return res.status(500).json({ error: e.message })
     }

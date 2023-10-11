@@ -26,11 +26,11 @@ app.get('/options/:id', optionsController.getOneOption)
 
 //Crud - Create
 app.post('/models/', modelController.createModel)
-app.post('/make/', makeController.createMake)
+app.post('/makes/', makeController.createMake)
 
 //crUd - Update
 app.put('/models/:id', modelController.updateModel)
-app.put('/make/:id', makeController.updateMake)
+app.put('/makes/:id', makeController.updateMake)
 
 //cruD - Delete
 app.delete('/models/:id', modelController.deleteModel)
