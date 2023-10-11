@@ -1,5 +1,5 @@
 const Option = require('../models/options')
-​
+
 const getAllOptions = async (req,res) => {
     try {
         const Option = await Option.find()
@@ -8,7 +8,7 @@ const getAllOptions = async (req,res) => {
         return res.status(500).send(e.message)
     }
 }
-​
+
 const getOneOption = async (req,res) => {
     try {
         const id = req.params.id
@@ -22,7 +22,7 @@ const getOneOption = async (req,res) => {
         return res.status(500).send(e.message)
     }
 }
-​
+
 module.exports = {
     getAllOptions,
     getOneOption

@@ -1,5 +1,5 @@
 const Model = require('../models/models')
-​
+
 const getAllModels = async (req,res) => {
     try {
         const Model = await Model.find()
@@ -8,7 +8,7 @@ const getAllModels = async (req,res) => {
         return res.status(500).send(e.message)
     }
 }
-​
+
 const getOneModel = async (req,res) => {
     try {
         const id = req.params.id
@@ -22,7 +22,7 @@ const getOneModel = async (req,res) => {
         return res.status(500).send(e.message)
     }
 }
-​
+
 module.exports = {
     getAllModels,
     getOneModel

@@ -1,5 +1,5 @@
 const Make = require('../models/makes')
-​
+
 const getAllMakes = async (req,res) => {
     try {
         const Make = await Make.find()
@@ -8,7 +8,7 @@ const getAllMakes = async (req,res) => {
         return res.status(500).send(e.message)
     }
 }
-​
+
 const getOneMake = async (req,res) => {
     try {
         const id = req.params.id
@@ -22,7 +22,7 @@ const getOneMake = async (req,res) => {
         return res.status(500).send(e.message)
     }
 }
-​
+
 module.exports = {
     getAllMakes,
     getOneMake

@@ -1,7 +1,7 @@
 const express = require('express');
-const db = require('./config');
+const db = require('./config/db');
 const logger = require('morgan')
-const bodyParser = require('body-paraser')
+const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const makeController = require('./controllers/makeController')
@@ -17,12 +17,12 @@ app.use(cors())
 
 
 //cRud - Read
-// app.get('/models', modelController.getAllModels)
-// app.get('/models/:id', modelController.getOneModel)
-// app.get('/makes', makeController.getAllMakes)
-// app.get('/makes/:id', makeController.getOneMake)
-// app.get('/options', optionsController.getAllOptions)
-// app.get('/options/:id', optionsController.getOneOption)
+app.get('/models', modelController.getAllModels)
+app.get('/models/:id', modelController.getOneModel)
+app.get('/makes', makeController.getAllMakes)
+app.get('/makes/:id', makeController.getOneMake)
+app.get('/options', optionsController.getAllOptions)
+app.get('/options/:id', optionsController.getOneOption)
 
 //Crud - Create
 // app.post('/models/', modelController.createModel)
