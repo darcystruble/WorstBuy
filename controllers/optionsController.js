@@ -2,7 +2,7 @@ const Option = require('../models/options')
 
 const getAllOptions = async (req,res) => {
     try {
-        const Option = await Option.find()
+        const options = await Option.find()
         return res.json(options)
     } catch (e) {
         return res.status(500).send(e.message)
@@ -12,9 +12,9 @@ const getAllOptions = async (req,res) => {
 const getOneOption = async (req,res) => {
     try {
         const id = req.params.id
-        const Option = await Option.findById(id)
-        if (Option) {
-            return res.json(Make)
+        const option = await Option.findById(id)
+        if (option) {
+            return res.json(option)
         }
         return res.status(404).send('Option with specified ID does not exist')
     } catch (e) {

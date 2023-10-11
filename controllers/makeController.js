@@ -2,7 +2,7 @@ const Make = require('../models/makes')
 
 const getAllMakes = async (req,res) => {
     try {
-        const Make = await Make.find()
+        const makes = await Make.find()
         return res.json(makes)
     } catch (e) {
         return res.status(500).send(e.message)
@@ -12,9 +12,9 @@ const getAllMakes = async (req,res) => {
 const getOneMake = async (req,res) => {
     try {
         const id = req.params.id
-        const Make = await Make.findById(id)
-        if (Make) {
-            return res.json(Make)
+        const makes = await Make.findById(id)
+        if (makes) {
+            return res.json(makes)
         }
         return res.status(404).send('Make with specified ID does not exist')
     } catch (e) {

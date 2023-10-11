@@ -2,7 +2,7 @@ const Model = require('../models/models')
 
 const getAllModels = async (req,res) => {
     try {
-        const Model = await Model.find()
+        const models = await Model.find()
         return res.json(models)
     } catch (e) {
         return res.status(500).send(e.message)
@@ -12,9 +12,9 @@ const getAllModels = async (req,res) => {
 const getOneModel = async (req,res) => {
     try {
         const id = req.params.id
-        const Model = await Model.findById(id)
-        if (Model) {
-            return res.json(Model)
+        const model = await Model.findById(id)
+        if (model) {
+            return res.json(model)
         }
         return res.status(404).send('Model with specified ID does not exist')
     } catch (e) {
