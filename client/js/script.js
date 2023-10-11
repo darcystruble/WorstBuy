@@ -46,6 +46,7 @@ const modelBtnClick = async () => {
 
 const fuelTypeBtnClick = async () => {
   mainBody.replaceChildren()
+  infoBtns.replaceChildren()
   for(let i = 0; i < 3; i++){
     console.log('hi')
     let carText = `<div class="item-holder">
@@ -60,15 +61,24 @@ const fuelTypeBtnClick = async () => {
 const searchBtnClick = async () => {
   mainBody.replaceChildren()
   carName = searchBar.value
-    for(let i = 0; i < 10; i++){
-      console.log('hi')
-      let carText = `<div class="item-holder">
-      <img src="" alt="" class="car-pic">
-      <h3 class="car-name">${carName}</h3>
-      <p class="price">${i}</p>
-      </div>`
-      mainBody.innerHTML += carText
-    }
+  let model = await axios.get(`${base}models`)
+  console.log(model)
+  model.data.forEach((car) => {
+    console.log(car)
+    if (carName == car.name) {
+      // console.log('hi')
+        let carText = `<div class="item-holder">
+        <img src="${car.image_of_car}" alt="" class="car-pic">
+        <h3 class="car-name">${carName}</h3>
+        <p class="price">$${car.price}</p>
+        </div>`
+        mainBody.innerHTML += carText
+      }   
+  })
+  console.log(mainBody)
+  if (!mainBody.innerText) {
+    mainBody.innerHTML = `<div class="not-found">"Car not found"</div>`
+  }
 }
 
 
