@@ -20,6 +20,17 @@ a {
     color: #ffffed;
     font-weight: 700;
 }
+a:hover {
+    color: #c7ea46;
+}
+header {
+    background-image: url('./johannes-hofmann-gW3ddTAKTJg-unsplash.jpg');
+    background-size: cover;
+    min-height: 90vh;
+    width: 100%;
+    background-position: 0 60%;
+    overflow: hidden;  
+}
 
 .nav-logo {
     font-size: 1.5rem;
@@ -28,16 +39,6 @@ a {
 .nav-logo .first {
     font-size: 2rem;
 }
-header {
-    background-image: url('./johannes-hofmann-gW3ddTAKTJg-unsplash.jpg');
-    background-size: cover;
-    min-height: 90vh;
-    width: 100%;
-    background-position: 0 60%;
-    overflow: hidden;
-    
-}
-
 .nav-bar {
     position: fixed;
     display: flex;
@@ -50,7 +51,6 @@ header {
     padding-top: 2px;
     padding-bottom: 2px;
 }
-
 .nav-menu {
     display: flex;
     justify-content: space-between;
@@ -84,8 +84,50 @@ header {
     background-color: #93ad34;
     border-color: #93ad34;
 }
+/* HAMBURGER MENU */
+.hamburger {
+    display: none;
+}
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3x ease-in-out;
+    background-color: #ffffed;
+  }
+
 /* BODY STYLES */
 main {
     min-height: 100vh;
     background-color: #ffffed;
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 420px){
+    .hamburger {
+        display: block;
+    }
+    .nav-menu {
+        flex-direction: column;
+        position: fixed;
+        right: -50%;
+        top: 2.9rem;
+        background-color: #101d11;
+        padding: 1rem;
+        transition: .2s;
+    }
+    .nav-menu.active {
+        right: 0;
+    }
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
 }
