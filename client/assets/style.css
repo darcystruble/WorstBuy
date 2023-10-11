@@ -114,6 +114,7 @@ header {
     height: 400px;
     width: 300px;
     border: 1px solid#080e08;
+    margin: 30px auto;
 }
 .car-pic {
     height: 100px;
