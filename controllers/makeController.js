@@ -23,8 +23,49 @@ const getOneMake = async (req,res) => {
     }
 }
 
+async function deleteMake(req, res) {
+    try {
+        const id = req.params.id
+        let make = await Make.findByIdAndDelete(id)
+        if (make) {
+            return res.status(200).json(make)
+        }
+        throw new Error("Make not found")
+    } catch (e) {
+        return res.status(500).send(e.message)
+    }
+}
+async function updateMake(req, res) {
+    try {
+        const id = req.params.id
+        let make = await Hero.findByIdAndUpdate(id, req.body, { new: true })
+        if (make) {
+            return res.status(200).json(make)
+        }
+        throw new Error("Make not found")
+    } catch (e) {
+        return res.status(500).send(e.message)
+    }
+}
+
+async function createMake(req, res) {
+    try {
+        const make = await new Make(req.body)
+        await make.save()
+        return res.status(201).json({
+            make
+        })
+    } catch (e) {
+        return res.status(500).json({ error: e.message })
+    }
+}
+
+
 module.exports = {
     getAllMakes,
-    getOneMake
+    getOneMake,
+    createMake,
+    updateMake,
+    deleteMake
 }
 //
