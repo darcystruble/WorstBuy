@@ -35,10 +35,11 @@ async function deleteMake(req, res) {
         return res.status(500).send(e.message)
     }
 }
+
 async function updateMake(req, res) {
     try {
         const id = req.params.id
-        let make = await Hero.findByIdAndUpdate(id, req.body, { new: true })
+        let make = await Make.findByIdAndUpdate(id, req.body, { new: true })
         if (make) {
             return res.status(200).json(make)
         }
