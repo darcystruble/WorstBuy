@@ -1,4 +1,4 @@
-const db = require('../db')
+const db = require('../config/db')
 const Make = require('../models/makes')
 const Model = require('../models/models')
 const Option = require('../models/options')
@@ -6,7 +6,7 @@ const Option = require('../models/options')
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 const main = async () => {
-    const optionBase = await new Universe({
+    const optionBase = await new Option({
             name:"Base",
             heated_seats: true,
             bluetooth: false,
@@ -15,7 +15,7 @@ const main = async () => {
         })
         optionBase.save()
 
-    const optionPremium = await new Universe({
+    const optionPremium = await new Option({
             name:"Premium",
             heated_seats: true,
             bluetooth: true,
@@ -24,7 +24,7 @@ const main = async () => {
         })
         optionPremium.save()
 
-    const optionLuxury = await new Universe({
+    const optionLuxury = await new Option({
             name:"Luxury",
             heated_seats: true,
             bluetooth: true,
@@ -33,34 +33,35 @@ const main = async () => {
         })
         optionLuxury.save()
 
+    console.log("Created options")
 
-    const makeToyota = await new Universe({
+    const makeToyota = await new Make({
             manufacturer: "Toyota",
-            logo: "toyota_logo.png"
+            logo: "https://images.unsplash.com/photo-1546545817-27f0fb006153?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dG95b3RhJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
         })
         makeToyota.save()
 
-    const makeHonda = await new Universe({
+    const makeHonda = await new Make({
             manufacturer: "Honda",
-            logo: "honda_logo.png"
+            logo: "https://images.unsplash.com/photo-1519429893275-fa1eb00397e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9uZGElMjBsb2dvfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60"
         })
         makeHonda.save()
 
-    const makeMercedes = await new Universe({
+    const makeMercedes = await new Make({
             manufacturer: "Mercedes",
-            logo: "Mercedes_logo.png"
+            logo: "https://images.unsplash.com/photo-1625074692991-b57f8ff90df6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVyY2VkZXMlMjBsb2dvfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60"
         })
         makeMercedes.save()
     
-    const makeFord= await new Universe({
+    const makeFord= await new Make({
             manufacturer: "Ford",
-            logo: "Ford_logo.png"
+            logo: "https://images.unsplash.com/photo-1617298005771-f37aa5d7d0cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMGxvZ298ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60"
         })
         makeFord.save()
 
-    const makeSubaru = await new Universe({
+    const makeSubaru = await new Make({
             manufacturer: "Subaru",
-            logo: "Subaru_logo.png"
+            logo: "https://images.unsplash.com/photo-1644004481797-eebb410ad624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c3ViYXJ1JTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
         })
         makeSubaru.save()
 
@@ -69,8 +70,8 @@ const main = async () => {
     const models = [
         // Toyota
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Toyota_Image_1",
+          make: makeToyota._id,
+          image_of_car: "https://images.pexels.com/photos/11285174/pexels-photo-11285174.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
           year: 2022,
           name: "Toyota Camry",
           mileage: 15000,
@@ -80,11 +81,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "LE",
           color: "Silver",
-          options: mongoose.Types.ObjectId()
+          options: optionBase._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Toyota_Image_2",
+          make: makeToyota._id,
+          image_of_car: "https://images.pexels.com/photos/9615358/pexels-photo-9615358.jpeg?auto=compress&cs=tinysrgb&w=400",
           year: 2023,
           name: "Toyota RAV4",
           mileage: 12000,
@@ -94,11 +95,11 @@ const main = async () => {
           fuel_type: "Hybrid",
           trim: "XLE",
           color: "Blue",
-          options: mongoose.Types.ObjectId()
+          options: optionLuxury._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Toyota_Image_3",
+          make: makeToyota._id,
+          image_of_car: "https://images.pexels.com/photos/17932828/pexels-photo-17932828/free-photo-of-red-toyota-supra-at-night.jpeg?auto=compress&cs=tinysrgb&w=400",
           year: 2022,
           name: "Toyota Corolla",
           mileage: 18000,
@@ -108,11 +109,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "SE",
           color: "Red",
-          options: mongoose.Types.ObjectId()
+          options: optionPremium._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Toyota_Image_4",
+          make: makeToyota._id,
+          image_of_car: "https://images.pexels.com/photos/11030018/pexels-photo-11030018.jpeg?auto=compress&cs=tinysrgb&w=400",
           year: 2023,
           name: "Toyota Highlander",
           mileage: 20000,
@@ -122,13 +123,13 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "Limited",
           color: "White",
-          options: mongoose.Types.ObjectId()
+          options: optionLuxury._id
         },
       
         // Honda
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Honda_Image_1",
+          make: makeHonda._id,
+          image_of_car: "https://images.pexels.com/photos/16387777/pexels-photo-16387777/free-photo-of-custom-honda-accord.jpeg?auto=compress&cs=tinysrgb&w=400",
           year: 2023,
           name: "Honda Accord",
           mileage: 16000,
@@ -138,11 +139,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "Sport",
           color: "Black",
-          options: mongoose.Types.ObjectId()
+          options: optionBase._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Honda_Image_2",
+          make: makeHonda._id,
+          image_of_car: "https://images.pexels.com/photos/6794815/pexels-photo-6794815.jpeg?auto=compress&cs=tinysrgb&w=400",
           year: 2022,
           name: "Honda Civic",
           mileage: 14000,
@@ -152,11 +153,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "EX",
           color: "Gray",
-          options: mongoose.Types.ObjectId()
+          options: optionBase._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Honda_Image_3",
+          make: makeHonda._id,
+          image_of_car: "https://images.unsplash.com/photo-1623597780975-38ccd5030c83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9uZGElMjBjcnZ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2023,
           name: "Honda CR-V",
           mileage: 10000,
@@ -165,12 +166,12 @@ const main = async () => {
           drivetrain: "All-Wheel Drive",
           fuel_type: "Hybrid",
           trim: "Touring",
-          color: "Green",
-          options: mongoose.Types.ObjectId()
+          color: "Silver",
+          options: optionPremium._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Honda_Image_4",
+          make: makeHonda._id,
+          image_of_car: "https://images.unsplash.com/photo-1605542203960-755c74d81964?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvbmRhJTIwc3V2fGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Honda Pilot",
           mileage: 19000,
@@ -179,14 +180,14 @@ const main = async () => {
           drivetrain: "All-Wheel Drive",
           fuel_type: "Gasoline",
           trim: "Elite",
-          color: "Silver",
-          options: mongoose.Types.ObjectId()
+          color: "White",
+          options: optionPremium._id
         },
       
         // Mercedes
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Mercedes_Image_1",
+          make: makeMercedes._id,
+          image_of_car: "https://images.unsplash.com/photo-1652549424658-fac6f10a22ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bWVyY2VkZXMlMjBjJTIwY2xhc3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2023,
           name: "Mercedes-Benz C-Class",
           mileage: 8000,
@@ -196,11 +197,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "C 300",
           color: "Blue",
-          options: mongoose.Types.ObjectId()
+          options: optionPremium._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Mercedes_Image_2",
+          make: makeMercedes._id,
+          image_of_car: "https://images.unsplash.com/photo-1602613893218-d059f21f4c02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVyY2VkZXMlMjBlJTIwY2xhc3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Mercedes-Benz E-Class",
           mileage: 9000,
@@ -209,12 +210,12 @@ const main = async () => {
           drivetrain: "All-Wheel Drive",
           fuel_type: "Hybrid",
           trim: "E 450",
-          color: "Black",
-          options: mongoose.Types.ObjectId()
+          color: "Gray",
+          options: optionLuxury._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Mercedes_Image_3",
+          make: makeMercedes._id,
+          image_of_car: "https://images.unsplash.com/photo-1619467177559-e89cca6d9263?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVyY2VkZXMlMjBnbGN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2023,
           name: "Mercedes-Benz GLC",
           mileage: 7500,
@@ -224,11 +225,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "GLC 300",
           color: "White",
-          options: mongoose.Types.ObjectId()
+          options: optionLuxury._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Mercedes_Image_4",
+          make: makeMercedes._id,
+          image_of_car: "https://images.unsplash.com/photo-1692970094412-8d701315773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1lcmNlZGVzJTIwZ2xlfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Mercedes-Benz GLE",
           mileage: 8200,
@@ -237,14 +238,14 @@ const main = async () => {
           drivetrain: "All-Wheel Drive",
           fuel_type: "Hybrid",
           trim: "GLE 450",
-          color: "Red",
-          options: mongoose.Types.ObjectId()
+          color: "Black",
+          options: optionPremium._id
         },
       
         // Ford
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Ford_Image_1",
+          make: makeFord._id,
+          image_of_car: "https://images.unsplash.com/photo-1581650107963-3e8c1f48241b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMG11c3Rhbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2023,
           name: "Ford Mustang",
           mileage: 7500,
@@ -253,12 +254,12 @@ const main = async () => {
           drivetrain: "Rear-Wheel Drive",
           fuel_type: "Gasoline",
           trim: "GT",
-          color: "Yellow",
-          options: mongoose.Types.ObjectId()
+          color: "Orange",
+          options: optionLuxury._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Ford_Image_2",
+          make: makeFord._id,
+          image_of_car: "https://images.unsplash.com/photo-1551830820-330a71b99659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9yZCUyMGYxNTB8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Ford F-150",
           mileage: 8200,
@@ -267,12 +268,12 @@ const main = async () => {
           drivetrain: "Four-Wheel Drive",
           fuel_type: "Gasoline",
           trim: "Lariat",
-          color: "Gray",
-          options: mongoose.Types.ObjectId()
+          color: "Blue",
+          options: optionPremium._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Ford_Image_3",
+          make: makeFord._id,
+          image_of_car: "https://images.pexels.com/photos/1211771/pexels-photo-1211771.jpeg?auto=compress&cs=tinysrgb&w=400",
           year: 2023,
           name: "Ford Escape",
           mileage: 6500,
@@ -281,12 +282,12 @@ const main = async () => {
           drivetrain: "Front-Wheel Drive",
           fuel_type: "Hybrid",
           trim: "SEL",
-          color: "Green",
-          options: mongoose.Types.ObjectId()
+          color: "Red",
+          options: optionBase._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Ford_Image_4",
+          make: makeFord._id,
+          image_of_car: "https://images.unsplash.com/photo-1670069248681-2c14b93bda1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZvcmQlMjBleHBsb3JlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Ford Explorer",
           mileage: 9800,
@@ -295,14 +296,14 @@ const main = async () => {
           drivetrain: "All-Wheel Drive",
           fuel_type: "Gasoline",
           trim: "Limited",
-          color: "Silver",
-          options: mongoose.Types.ObjectId()
+          color: "Black",
+          options: optionPremium._id
         },
       
         // Subaru
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Subaru_Image_1",
+          make: makeSubaru._id,
+          image_of_car: "https://images.unsplash.com/photo-1546023165-1c4a1b59f2b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c3ViYXJ1JTIwb3V0YmFja3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60",
           year: 2023,
           name: "Subaru Outback",
           mileage: 7000,
@@ -312,11 +313,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "Limited",
           color: "Blue",
-          options: mongoose.Types.ObjectId()
+          options: optionBase._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Subaru_Image_2",
+          make: makeSubaru._id,
+          image_of_car: "https://images.unsplash.com/photo-1611609054395-246e4000ad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3ViYXJ1JTIwaW1wcmV6YXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Subaru Impreza",
           mileage: 6400,
@@ -326,11 +327,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "Sport",
           color: "Red",
-          options: mongoose.Types.ObjectId()
+          options: optionBase._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Subaru_Image_3",
+          make: makeSubaru._id,
+          image_of_car: "https://images.unsplash.com/photo-1631913551163-0dd28fd69e90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3ViYXJ1JTIwZm9yZXN0ZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60",
           year: 2023,
           name: "Subaru Forester",
           mileage: 8000,
@@ -340,11 +341,11 @@ const main = async () => {
           fuel_type: "Gasoline",
           trim: "Premium",
           color: "White",
-          options: mongoose.Types.ObjectId()
+          options: optionPremium._id
         },
         {
-          make: mongoose.Types.ObjectId(),
-          image_of_car: "Subaru_Image_4",
+          make: makeSubaru._id,
+          image_of_car: "https://images.unsplash.com/photo-1616804087673-cdcd32e5578f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3ViYXJ1JTIwbGVnYWN5fGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
           year: 2022,
           name: "Subaru Legacy",
           mileage: 7500,
@@ -353,11 +354,17 @@ const main = async () => {
           drivetrain: "All-Wheel Drive",
           fuel_type: "Gasoline",
           trim: "Base",
-          color: "Silver",
-          options: mongoose.Types.ObjectId()
+          color: "White",
+          options: optionLuxury._id
         }
     ]
-      
+    await Model.insertMany(models)
     console.log('Created models');
-
 }
+
+const run = async () => {
+    await main()
+    db.close()
+  }
+  
+  run()
