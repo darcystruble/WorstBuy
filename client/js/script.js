@@ -167,6 +167,7 @@ const fuelTypeBtnClick = async () => {
 }
 
 const searchBtnClick = async () => {
+  infoBtns.replaceChildren()
   mainBody.replaceChildren()
   carName = searchBar.value
   let model = await axios.get(`${base}models`)
