@@ -88,12 +88,20 @@ const searchBtnClick = async () => {
         options.push("remote start")
       }
 
+      const formattedPrice = car.price.toLocaleString()
+      const formattedMileage = car.mileage.toLocaleString()
+
+      const paymentMonthly = car.price / 72
+      const formattedMonthly = Math.floor(paymentMonthly.toLocaleString())
+
       let carText = `<div class="item-holder">
         <img src="${car.image_of_car}" alt="" class="car-pic">
-        <h3 class="car-name">${carName}</h3>
-        <p class="price">$${car.price}</p>
+        <h3 class="car-name">${car.year} ${carName}</h3>
+        <p class="miles">${formattedMileage} miles</p>
+        <p class="price">Price: $${formattedPrice}</p>
+        <h5 class="monthly">$${formattedMonthly}/mo*</h5>
         <select id="drop-down" id="languages">
-        ${optionsDropdown}
+        Package: ${optionsDropdown}
         </select>
         </div>`
 
@@ -131,7 +139,6 @@ async function getOption(name) {
       console.log(data[i])
       console.log(data[i]._id)
       return data[i]
-
     }
   }
 }
