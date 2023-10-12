@@ -41,8 +41,37 @@ const makeBtnClick = async () => {
 }
 
 const modelBtnClick = async () => {
+  infoBtns.replaceChildren()
   mainBody.replaceChildren()
-  let testing = await axios.get(`${base}models`)
+
+  try {
+    const modelsResponse = await axios.get(`${base}models`)
+    const modelsData = modelsResponse.data
+
+    
+
+    if (modelsData.length > 0) {
+      modelsData.forEach((model) => {
+        const carText = `<div class="item-holder">
+          <img src="${model.image_of_car}" alt="" class="car-pic">
+          <h3 class="car-name">${model.year} ${model.name}</h3>
+          <p class="miles">${model.mileage.toLocaleString()} miles</p>
+          <p class="price">Price: $${model.price.toLocaleString()}</p>
+          <h5 class="monthly">$${Math.floor((model.price / 72).toLocaleString())}/mo*</h5>
+          <select id="drop-down" id="languages">
+            <!-- Add your options here -->
+          </select>
+          <p id="options">Options: ${getOptionValues(model.options).join(", ")}</p>
+        </div>`;
+
+        mainBody.innerHTML += carText;
+      })
+    } else {
+      mainBody.innerHTML = `<div class="not-found">No car models found</div>`;
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 const fuelTypeBtnClick = async () => {

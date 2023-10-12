@@ -122,6 +122,7 @@ header {
     background-color: whitesmoke;
     box-shadow: 0 10px 15px #6d7c6e;
     margin: 30px auto;
+    position: relative;
 }
 .info-button {
     display: flex;
@@ -140,7 +141,8 @@ header {
     background-color: #93ad34;
 }
 .car-pic {
-    height: 200px;
+    max-height: 200px;
+    max-width: 250px;
     border: 1px solid #93ad34;
 }
 
@@ -152,6 +154,7 @@ header {
 
 /* MEDIA QUERY */
 @media screen and (max-width: 420px){
+
     .hamburger {
         display: block;
     }
