@@ -84,17 +84,20 @@ const makeBtnClick = async () => {
           <select id="drop-down${(model.name).replace(" ", "")}" id="languages">
           ${optionsDropdown}        
           </select>
-          <p id="options">Options: ${options.join(", ")}</p>
+          <p id="options${(model.name).replace(" ", "")}">Options: ${options.join(", ")}</p>
           </div>`
 
           mainBody.innerHTML += carText
           console.log(`#drop-down${(model.name).replace(" ", "")}`)
           const dropdown = document.querySelector(`#drop-down${(model.name).replace(" ", "")}`)
           console.log(dropdown)
-          const optionsClass = document.querySelector('#options')
+          
           
           dropdown.addEventListener('change', async function () {
             // const dropdown = document.querySelector('#drop-down')
+            const optionsClass = document.querySelector(`options${(model.name).replace(" ", "")}`)
+            console.log("************")
+            console.log(optionsClass)
             const dropdown = document.querySelector(`#drop-down${(model.name).replace(" ", "")}`)
             const selectedValue = dropdown.value      
             // console.log('Selected Option: ' + selectedValue);
