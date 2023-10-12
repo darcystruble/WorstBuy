@@ -117,7 +117,7 @@ header {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 400px;
+    min-height: 400px;
     width: 300px;
     background-color: whitesmoke;
     box-shadow: 0 10px 15px #6d7c6e;
@@ -144,10 +144,19 @@ header {
     border: 1px solid #93ad34;
 }
 
+#options {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 /* MEDIA QUERY */
 @media screen and (max-width: 420px){
     .hamburger {
         display: block;
+    }
+    .car-pic {
+        height: 100px;
     }
     .nav-menu {
         flex-direction: column;
@@ -172,7 +181,8 @@ header {
     }
     .item-holder{
         width: 150px;
-        height: 200px;
+        min-height: 200px;
+        font-size: .7rem;
     }
     .search-bar {
         width: 250px;
