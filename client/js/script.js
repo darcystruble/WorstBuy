@@ -151,11 +151,19 @@ fuelTypeBtn.addEventListener('click', fuelTypeBtnClick)
 searchButton.addEventListener('click', searchBtnClick)
 infoBtns.addEventListener('click', console.log('hi'))
 
+// Add an event listener to detect changes in the selected option
+dropdown.addEventListener('change', function() {
+  // Get the selected value
+  const selectedValue = dropdown.value;
+  console.log('Selected Option: ' + selectedValue);
+})
 
 // HAMBURGER MENU
 const hamburger = document.querySelector('.hamburger')
 const navMenu = document.querySelector('.nav-menu')
 const navLink = document.querySelectorAll('.nav-link')
+
+
 
 const mobileMenu = () => {
   hamburger.classList.toggle('active')
