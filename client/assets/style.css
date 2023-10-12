@@ -159,7 +159,8 @@ header {
         display: block;
     }
     .car-pic {
-        height: 100px;
+        max-height: 100px;
+        max-width: 120px;
     }
     .nav-menu {
         flex-direction: column;
