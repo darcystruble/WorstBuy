@@ -66,49 +66,73 @@ const searchBtnClick = async () => {
   let optionsAxios = (await axios.get(`${base}options`)).data
   console.log(optionsAxios)
   let optionsDropdown = ""
-  optionsAxios.forEach((option) => {
-    optionsDropdown += `<option value="${option.name}">${option.name}</option>`
-  })
+  // optionsAxios.forEach((option) => {
+  //   if (true) {
+  //     optionsDropdown += `<option value="${option.name}">${option.name}</option>`
+  //   } else {
+
+  //   }
+  // })
 
   console.log(model)
   model.data.forEach((car) => {
-    console.log(car)
+    // console.log(car)
     if (carName == car.name) {
-      let options = []
-      if (car.options.bluetooth) {
-        options.push("bluetooth")
-      }
-      if (car.options.heated_seats) {
-        options.push("heated seats")
-      }
-      if (car.options.navigation) {
-        options.push("navigation")
-      }
-      if (car.options.remote_start) {
-        options.push("remote start")
-      }
+      optionsAxios.forEach((option) => {
+        if (car.options.name == option.name) {
+          optionsDropdown += `<option value="${option.name}" selected>${option.name}</option>`
+        } else {
+          optionsDropdown += `<option value="${option.name}">${option.name}</option>`
+        }
+      })
+      
+      
+      let options = getOptionValues(car.options)
+      // if (car.options.bluetooth) {
+      //   options.push("bluetooth")
+      // }
+      // if (car.options.heated_seats) {
+      //   options.push("heated seats")
+      // }
+      // if (car.options.navigation) {
+      //   options.push("navigation")
+      // }
+      // if (car.options.remote_start) {
+      //   options.push("remote start")
+      // }
 
       let carText = `<div class="item-holder">
         <img src="${car.image_of_car}" alt="" class="car-pic">
         <h3 class="car-name">${carName}</h3>
         <p class="price">$${car.price}</p>
+
         <select id="drop-down" id="languages">
-        ${optionsDropdown}
+        ${optionsDropdown}        
         </select>
+        <p id="options">Options: ${options.join(", ")}</p>
         </div>`
 
       mainBody.innerHTML += carText
 
+      
       const dropdown = document.querySelector('#drop-down')
+      const optionsClass = document.querySelector('#options')
+      
       dropdown.addEventListener('change', async function () {
-
-        const selectedValue = dropdown.value;
-        console.log('Selected Option: ' + selectedValue);
-        let optionObject = await getOption(selectedValue)
-        console.log(`****Option ${optionObject}`)
-        console.log(optionObject)
+        const dropdown = document.querySelector('#drop-down')
         
+        const selectedValue = dropdown.value;        
+        // console.log('Selected Option: ' + selectedValue);
+        let optionObject = await getOption(selectedValue)
+        console.log(optionObject)
+        let optionArr = getOptionValues(optionObject)
+        console.log(optionArr)
+        // console.log(`****Option ${optionObject}`)
+        // console.log(optionObject)
+        console.log(optionArr.join(", "))
+        optionsClass.innerText = `Options: ${optionArr.join(", ")}`
         await axios.put(`${base}models/${car._id}`, { options: optionObject._id })
+
       })
     }
 
@@ -136,6 +160,23 @@ async function getOption(name) {
   }
 }
 
+function getOptionValues(options) {
+  let optionsArr =[]
+  if (options.bluetooth) {
+    optionsArr.push("bluetooth")
+  }
+  if (options.heated_seats) {
+    optionsArr.push("heated seats")
+  }
+  if (options.navigation) {
+    optionsArr.push("navigation")
+  }
+  if (options.remote_start) {
+    optionsArr.push("remote start")
+  }
+  return optionsArr
+}
+
 // dropdown.addEventListener('change', function() {
 //   // Get the selected value
 //   const selectedValue = dropdown.value;
@@ -152,11 +193,11 @@ searchButton.addEventListener('click', searchBtnClick)
 infoBtns.addEventListener('click', console.log('hi'))
 
 // Add an event listener to detect changes in the selected option
-dropdown.addEventListener('change', function() {
-  // Get the selected value
-  const selectedValue = dropdown.value;
-  console.log('Selected Option: ' + selectedValue);
-})
+// dropdown.addEventListener('change', function() {
+//   // Get the selected value
+//   const selectedValue = dropdown.value;
+//   console.log('Selected Option: ' + selectedValue);
+// })
 
 // HAMBURGER MENU
 const hamburger = document.querySelector('.hamburger')
