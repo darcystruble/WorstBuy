@@ -7,6 +7,7 @@ const makeBtn = document.querySelector('#new')
 const modelBtn = document.querySelector('#used')
 const fuelTypeBtn = document.querySelector('#electric')
 
+
 // VARIABLES
 let carImg
 let carName
@@ -21,11 +22,11 @@ const tester = async () => {
 }
 tester()
 
-  //     let carText = `<div class="item-holder">
-  //     <img src="" alt="" class="car-pic">
-  //     <h3 class="car-name">${carName}</h3>
-  //     <p class="price">price</p>
-  //     </div>`
+//     let carText = `<div class="item-holder">
+//     <img src="" alt="" class="car-pic">
+//     <h3 class="car-name">${carName}</h3>
+//     <p class="price">price</p>
+//     </div>`
 
 const makeBtnClick = async () => {
   infoBtns.replaceChildren()
@@ -47,7 +48,7 @@ const modelBtnClick = async () => {
 const fuelTypeBtnClick = async () => {
   mainBody.replaceChildren()
   infoBtns.replaceChildren()
-  for(let i = 0; i < 3; i++){
+  for (let i = 0; i < 3; i++) {
     console.log('hi')
     let carText = `<div class="item-holder">
     <img src="" alt="" class="car-pic">
@@ -62,6 +63,13 @@ const searchBtnClick = async () => {
   mainBody.replaceChildren()
   carName = searchBar.value
   let model = await axios.get(`${base}models`)
+  let optionsAxios = (await axios.get(`${base}options`)).data
+  console.log(optionsAxios)
+  let optionsDropdown = ""
+  optionsAxios.forEach((option) => {
+    optionsDropdown += `<option value="${option.name}">${option.name}</option>`
+  })
+
   console.log(model)
   model.data.forEach((car) => {
     console.log(car)
@@ -79,22 +87,62 @@ const searchBtnClick = async () => {
       if (car.options.remote_start) {
         options.push("remote start")
       }
+
       let carText = `<div class="item-holder">
         <img src="${car.image_of_car}" alt="" class="car-pic">
         <h3 class="car-name">${carName}</h3>
         <p class="price">$${car.price}</p>
-        <p class="price">${car.options.name} Package: ${options.join(", ")}</p>
+        <select id="drop-down" id="languages">
+        ${optionsDropdown}
+        </select>
         </div>`
-        mainBody.innerHTML += carText
-      }   
+
+      mainBody.innerHTML += carText
+
+      const dropdown = document.querySelector('#drop-down')
+      dropdown.addEventListener('change', async function () {
+
+        const selectedValue = dropdown.value;
+        console.log('Selected Option: ' + selectedValue);
+        let optionObject = await getOption(selectedValue)
+        console.log(`****Option ${optionObject}`)
+        console.log(optionObject)
+        
+        await axios.put(`${base}models/${car._id}`, { options: optionObject._id })
+      })
+    }
+
   })
   console.log(mainBody)
   if (!mainBody.innerText) {
     mainBody.innerHTML = `<div class="not-found">"Car not found"</div>`
   }
+
+
 }
 
+async function getOption(name) {
+  let {data} = await axios.get(`${base}options`)
+  console.log(data)
+  for (let i = 0; i < data.length; i++) {
+    console.log(name, data[i].name )
+    if (data[i].name == name) {
+      console.log('returned')
+      console.log(data[i])
+      console.log(data[i]._id)
+      return data[i]
 
+    }
+  }
+}
+
+// dropdown.addEventListener('change', function() {
+//   // Get the selected value
+//   const selectedValue = dropdown.value;
+//   console.log('Selected Option: ' + selectedValue);
+// })
+
+{/* <p class="price">${car.options.name} Package: ${options.join(", ")}</p> */ }
 
 // ONCLICK ELEMENTS
 makeBtn.addEventListener('click', makeBtnClick)
