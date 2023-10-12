@@ -32,12 +32,90 @@ const makeBtnClick = async () => {
   infoBtns.replaceChildren()
   mainBody.replaceChildren()
   let makes = await axios.get(`${base}makes`)
+  const makeButtons = []
+  
+  makes.data.forEach(make => {
+    const carManufacturer = make.manufacturer;
+    let makeInfoBtn = `<button class="more-info" id="${carManufacturer}">${carManufacturer}</button>`;
+    infoBtns.innerHTML += makeInfoBtn;
+    console.log(carManufacturer, "was here");
+    const makeBrandBtn = document.querySelector(`#${carManufacturer}`);
+    makeButtons.push(makeBrandBtn);
+  });
 
-  makes.data.forEach((make) => {
-    carManufacturer = make.manufacturer
-    let makeInfoBtn = `<button class="more-info">${carManufacturer}</button>`
-    infoBtns.innerHTML += makeInfoBtn
-  })
+  infoBtns.addEventListener('click', async (event) => {
+    mainBody.replaceChildren()
+    const clickedButton = event.target;
+    // mainBody.innerHTML = ""
+
+    if (clickedButton.classList.contains('more-info')) {
+      const carManufacturer = clickedButton.id;
+      console.log(`Button clicked: ${carManufacturer}`);
+      let optionsAxios = (await axios.get(`${base}options`)).data
+      console.log(optionsAxios)
+      let optionsDropdown = ""
+
+      let models = (await axios.get(`${base}models`)).data;
+      console.log(models)
+      models.forEach(model => {
+        optionsDropdown = ""
+        if (model.make.manufacturer === carManufacturer) {
+          
+            optionsAxios.forEach((option) => {
+              if (model.options.name == option.name) {
+                optionsDropdown += `<option value="${option.name}" selected>${option.name}</option>`
+              } else {
+                optionsDropdown += `<option value="${option.name}">${option.name}</option>`
+              }
+            })
+                     
+          let options = getOptionValues(model.options)
+          const formattedPrice = model.price.toLocaleString()
+          const formattedMileage = model.mileage.toLocaleString()
+          const paymentMonthly = model.price / 72
+          const formattedMonthly = Math.floor(paymentMonthly.toLocaleString())
+
+          let carText = `<div class="item-holder">
+          <img src="${model.image_of_car}" alt="" class="car-pic">
+          <h3 class="car-name">${model.year} ${model.name}</h3>
+          <p class="miles">${formattedMileage} miles</p>
+          <p class="price">Price: $${formattedPrice}</p>
+          <h5 class="monthly">$${formattedMonthly}/mo*</h5>
+          <select id="drop-down${(model.name).replace(" ", "")}" id="languages">
+          ${optionsDropdown}        
+          </select>
+          <p id="options${(model.name).replace(" ", "")}">Options: ${options.join(", ")}</p>
+          </div>`
+
+          mainBody.innerHTML += carText
+          console.log(`#drop-down${(model.name).replace(" ", "")}`)
+          const dropdown = document.querySelector(`#drop-down${(model.name).replace(" ", "")}`)
+          console.log(dropdown)
+          
+          
+          dropdown.addEventListener('change', async function () {
+            // const dropdown = document.querySelector('#drop-down')
+            const optionsClass = document.querySelector(`options${(model.name).replace(" ", "")}`)
+            console.log("************")
+            console.log(optionsClass)
+            const dropdown = document.querySelector(`#drop-down${(model.name).replace(" ", "")}`)
+            const selectedValue = dropdown.value      
+            // console.log('Selected Option: ' + selectedValue);
+            let optionObject = await getOption(selectedValue)
+            console.log(optionObject)
+            let optionArr = getOptionValues(optionObject)
+            console.log(optionArr)
+            // console.log(`****Option ${optionObject}`)
+            // console.log(optionObject)
+            console.log(optionArr.join(", "))
+            optionsClass.innerText = `Options: ${optionArr.join(", ")}`
+            await axios.put(`${base}models/${model._id}`, { options: optionObject._id })
+
+      })
+        }
+      });
+    }
+  });
 }
 
 const modelBtnClick = async () => {
@@ -117,18 +195,7 @@ const searchBtnClick = async () => {
       
       
       let options = getOptionValues(car.options)
-      // if (car.options.bluetooth) {
-      //   options.push("bluetooth")
-      // }
-      // if (car.options.heated_seats) {
-      //   options.push("heated seats")
-      // }
-      // if (car.options.navigation) {
-      //   options.push("navigation")
-      // }
-      // if (car.options.remote_start) {
-      //   options.push("remote start")
-      // }
+
 
       const formattedPrice = car.price.toLocaleString()
       const formattedMileage = car.mileage.toLocaleString()
